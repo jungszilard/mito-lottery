@@ -1,0 +1,144 @@
+name: npm run build
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v3
+    - name: Set up Node environment
+      uses: actions/setup-node@v3
+    - name: Cache node modules
+      uses: actions/cache@v3
+      id: cache-node-modules
+      with:
+        path: '**/node_modules'
+        key: npm-${{ hashFiles('**/package-lock.json') }}
+    - name: Install node modules if cache not present
+      run: npm install
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+    - run: npm run build
+      env:
+        DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
+
+  title_rule:
+    name: PR title rules
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        uses: deepakputhraya/action-pr-title@v1.0.2
+        with:
+          regex: '\(*\)!?:\s.+'
+          allowed_prefixes: 'fix,feat,build,chore,ci,docs,style,refactor,perf,test,e2e'
+          disallowed_prefixes: ''
+          prefix_case_sensitive: false
+          min_length: 12
+          max_length: 150
+          github_token: ${{ github.token }}
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v3
+    - name: Restore node modules from cache
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: npm-${{ hashFiles('**/package-lock.json') }}
+    # Lint and write to a full report. Capture the result (i.e. lint failed
+    # or not). Then show the report in a human readable format, save as HTML
+    # to include in an artifact, and then finally exit based on the original
+    # lint status.
+    - name: Lint
+      run: |
+        lint_status=0
+        npm run lint -- --format json-with-metadata -o lint-report.json || lint_status=$?
+        node -p "require('./node_modules/eslint/lib/cli-engine/formatters/html.js')(require('./lint-report.json').results, require('./lint-report.json').metadata)" > lint-report.html
+        node -p "require('./node_modules/eslint/lib/cli-engine/formatters/stylish.js')(require('./lint-report.json').results)"
+        exit "${lint_status}"
+    - name: Prettier
+      run: npm run format
+    - name: Upload linting report
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-report
+        path: ./lint-report.html
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v3
+    - name: Restore node modules from cache
+      uses: actions/cache@v3
+      with:
+        path: '**/node_modules'
+        key: npm-${{ hashFiles('**/package-lock.json') }}
+    - name: Jest
+      run: npm run test:ci
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: ./coverage/lcov-report/
+    - name: Upload coverage report for coverage commenter
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ github.sha }}-coverage-report
+        path: ./coverage/report.json
+    - name: Upload main coverage report for coverage commenter
+      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v3
+      with:
+        name: main-coverage-report
+        path: ./coverage/report.json
+
+  coverage-commenter:
+    name: Coverage change commenter
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    needs: test
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v3
+    - name: Download main coverage report artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        github_token: ${{ github.token }}
+        name: main-coverage-report
+        path: ./coverage-commenter/main
+        check_artifacts: true
+        search_artifacts: true
+        workflow_conclusion: 'success'
+    - name: Download current branch coverage report
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ github.sha }}-coverage-report
+        path: ./coverage-commenter
+    - name: Check coverage
+      uses: ArtiomTr/jest-coverage-report-action@v2
+      id: coverage
+      with:
+        coverage-file: ./coverage-commenter/report.json
+        base-coverage-file: ./coverage-commenter/main/report.json
+        output: report-markdown
+        skip-step: all
+        annotations: none
+    - name: Sticky comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        message: ${{ steps.coverage.outputs.report }}
