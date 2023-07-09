@@ -6,7 +6,9 @@ describe("Home", () => {
     render(<Home />)
 
     const vercelLogo = screen.getByTestId("vercel-logo")
+    const getStarted = screen.getByTestId("get-started")
 
     expect(vercelLogo).toBeInTheDocument()
+    expect(getStarted).toBeInTheDocument()
   })
 })

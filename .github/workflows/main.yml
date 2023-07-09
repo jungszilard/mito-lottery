@@ -1,10 +1,16 @@
-# .github/workflow/main.yml
 name: npm run build
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
     - name: Check out Git repository
       uses: actions/checkout@v3
     - name: Set up Node environment
@@ -104,6 +110,8 @@ jobs:
     name: Coverage change commenter
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     needs: test
     steps:
     - name: Check out Git repository
