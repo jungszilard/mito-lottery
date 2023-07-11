@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="h-15 bg-gradien-primary flex items-center"
+  >
+    <img
+      alt="Lottery app icon"
+      class="ml-5 mr-8 "
+      data-nimg="1"
+      data-testid="lottery-icon"
+      decoding="async"
+      fetchpriority="high"
+      height="40"
+      src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+      srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+      style="color: transparent;"
+      width="40"
+    />
+    <p
+      class="text-white text-4xl font-bold capitalize"
+    >
+      Lottery simulator
+    </p>
+  </div>
+</div>
+`;

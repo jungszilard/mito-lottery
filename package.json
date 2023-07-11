@@ -14,10 +14,11 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "postinstall": "if [ \"$NODE_ENV\" = \"development\" ]; then husky install; fi",
     "prettier": "prettier",
-    "format": "prettier app --check --config .prettierrc",
-    "format:write": "prettier app --write --config .prettierrc"
+    "format": "prettier src --check --config .prettierrc",
+    "format:write": "prettier src --write --config .prettierrc"
   },
   "dependencies": {
+    "@fontsource/nunito": "^5.0.5",
     "@types/node": "20.4.0",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",

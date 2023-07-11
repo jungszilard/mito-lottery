@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders homepage unchanged 1`] = `
+<div>
+  <div
+    data-testid="home-page"
+  >
+    <p
+      class="text-4.5xl font-bold capitalize mb-8"
+    >
+      Result
+    </p>
+    <div
+      class="flex mb-8"
+    >
+      <div
+        class="flex bg-mito-secondary text-white font-bold py-4.5 px-6 rounded-base"
+      >
+        <div
+          class="mr-6"
+        >
+          <p
+            data-testid="number-of-ticket"
+          >
+            Number of tickets:
+          </p>
+          <p
+            class="text-sm"
+          >
+            Years spent:
+          </p>
+          <p
+            class="text-sm"
+          >
+            Cost of tickets:
+          </p>
+        </div>
+        <div>
+          <p>
+            0
+          </p>
+          <p
+            class="text-sm"
+          >
+            0
+          </p>
+          <p
+            class="text-sm"
+          >
+            0
+            ,00 Ft
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex mb-8"
+    >
+      <div
+        class="flex border border-solid border-result-border rounded-base"
+      >
+        <div
+          class="border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
+        >
+          <p
+            class="font-bold text-xs"
+          >
+            2 matches
+          </p>
+          <p
+            class="font-extrabold"
+          >
+            0
+          </p>
+        </div>
+        <div
+          class="border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
+        >
+          <p
+            class="font-bold text-xs"
+          >
+            3 matches
+          </p>
+          <p
+            class="font-extrabold"
+          >
+            0
+          </p>
+        </div>
+        <div
+          class="border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
+        >
+          <p
+            class="font-bold text-xs"
+          >
+            4 matches
+          </p>
+          <p
+            class="font-extrabold"
+          >
+            0
+          </p>
+        </div>
+        <div
+          class="w-32 h-18 flex flex-col justify-between items-center py-3"
+        >
+          <p
+            class="font-bold text-xs"
+          >
+            5 matches
+          </p>
+          <p
+            class="font-extrabold"
+          >
+            0
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="flex h-9.5 mb-6 "
+    >
+      <p
+        class="my-auto w-40"
+      >
+        Winning numbers:
+      </p>
+    </div>
+    <div
+      class="flex h-9.5 mb-8"
+    >
+      <p
+        class="my-auto w-40"
+      >
+        Your numbers:
+      </p>
+    </div>
+    <div
+      class="flex items-center mb-8"
+    >
+      <div
+        class="mr-14"
+      >
+        Play with random numbers:
+      </div>
+      <button
+        class="cursor-pointer w-8 h-8 border border-mito-primary rounded hover:bg-grey-700"
+      />
+    </div>
+    <p>
+      Speed
+    </p>
+    <div
+      class=""
+    >
+      <input
+        class="w-full h-2 bg-mito-secondary rounded-lg appearance-none cursor-pointer"
+        id="steps-range"
+        max="1000"
+        min="1"
+        step="1"
+        type="range"
+        value="1"
+      />
+    </div>
+  </div>
+</div>
+`;

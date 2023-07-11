@@ -1,8 +1,8 @@
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-
-const inter = Inter({ subsets: ["latin"] })
+import Header from "../components/Header"
+// import { Inter } from "next/font/google"
+// const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Lottery simulator",
@@ -16,7 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className='bg-mito-grad text-mito-primary'>
+        <Header />
+        <div className='py-12 px-20 mt-10 container mx-auto bg-white rounded-3xl shadow-component'>
+          {children}
+        </div>
+      </body>
     </html>
   )
 }

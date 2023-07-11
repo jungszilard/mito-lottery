@@ -16,7 +16,7 @@ const RangeSlider = ({
   setIntervalValue,
 }: IRangeSlider) => {
   return (
-    <div className='grid place-items-center bg-green-300'>
+    <div className=''>
       <input
         id='steps-range'
         type='range'
@@ -25,7 +25,7 @@ const RangeSlider = ({
         value={intervalValue}
         onChange={(e) => setIntervalValue(parseInt(e.target.value))}
         step={step}
-        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'
+        className='w-full h-2 bg-mito-secondary rounded-lg appearance-none cursor-pointer'
       ></input>
     </div>
   )
