@@ -9,24 +9,7 @@ import LotteryNumbers from "../components/LotteryNumbers"
 import Modal from "../components/Modal"
 import ResultDetails from "../components/ResutDetails"
 import Summary from "../components/Summary"
-
-export const generateLotteryNumbers = (): number[] => {
-  const numbers: number[] = []
-
-  while (numbers.length < 5) {
-    const randomNum = Math.floor(Math.random() * 90) + 1
-
-    if (!numbers.includes(randomNum)) {
-      numbers.push(randomNum)
-    }
-  }
-
-  return numbers
-}
-
-export const formatNumber = (number: number): string => {
-  return new Intl.NumberFormat().format(number).replace(/,/g, " ")
-}
+import { generateLotteryNumbers } from "../components/utils"
 
 export default function Home() {
   const [lotteryNumbers, setLotteryNumbers] = useState<number[]>([])

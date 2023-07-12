@@ -1,4 +1,4 @@
-import { formatNumber } from "../app/page"
+import { formatNumber } from "./utils"
 
 interface ISummaryProps {
   ticketNumber: number

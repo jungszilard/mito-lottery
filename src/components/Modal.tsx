@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Dispatch, SetStateAction } from "react"
-import { generateLotteryNumbers } from "../app/page"
 import _ from "lodash"
+import { generateLotteryNumbers } from "./utils"
 
 type FormData = {
   number1: number
