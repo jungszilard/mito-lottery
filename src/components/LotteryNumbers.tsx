@@ -12,7 +12,7 @@ const LotteryNumbers = ({ lotteryNumbers }: ILotteryNumbersProps) => {
       emptyNumbers.push(
         <div
           key={i}
-          className='w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4'
+          className='w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4'
         ></div>
       )
     }
@@ -27,7 +27,7 @@ const LotteryNumbers = ({ lotteryNumbers }: ILotteryNumbersProps) => {
         : lotteryNumbers.map((lotteryNumber) => (
             <div
               key={lotteryNumber}
-              className='w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4'
+              className='w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4'
             >
               {lotteryNumber}
             </div>

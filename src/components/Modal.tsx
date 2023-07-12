@@ -69,10 +69,10 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
     lotteryNumber: number
   ) => {
     return (
-      <div className='mb-3 flex justify-around items-center'>
+      <div className='mb-3 flex justify-around items-center text-sm sm:text-base'>
         <label>Pick your lottery number {lotteryNumber}:</label>
         <input
-          className='w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center'
+          className='w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center'
           type='number'
           {...register(field, { required: true, valueAsNumber: true })}
           onChange={(e) => handleLotteryNumber(field, parseInt(e.target.value))}
@@ -95,7 +95,7 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
           <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none p-6'>
             {/*header*/}
             <div className='flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t'>
-              <h3 className='text-3xl font-semibold'>
+              <h3 className='text-2xl sm:text-3xl font-semibold'>
                 Pick your lottery numbers
               </h3>
             </div>
@@ -109,7 +109,7 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
                 {renderLotteryNumberField(FIELD_NUMBER.number5, 5)}
                 <div className='flex items-center justify-end pt-6 mt-4 border-t border-solid border-slate-200 rounded-b'>
                   <button
-                    className='bg-blue-400 hover:bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                    className='h-18 sm:h-max bg-blue-400 hover:bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-xs sm:text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                     type='button'
                     onClick={() => {
                       setLotteryNumbersTip(generateLotteryNumbers())
@@ -119,7 +119,7 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
                     Play with random numbers
                   </button>
                   <button
-                    className='bg-emerald-400 hover:bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+                    className='h-18 sm:h-max bg-emerald-400 hover:bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs sm:text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                     type='submit'
                   >
                     Submit

@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <div data-testid='home-page'>
-      <p className='text-4.5xl font-bold capitalize mb-8'>Result</p>
+      <p className='text-3xl sm:text-4.5xl font-bold capitalize mb-8'>Result</p>
       <Summary ticketNumber={ticketNumber} />
       <ResultDetails
         lottery2matches={lottery2matches}
@@ -79,39 +79,48 @@ export default function Home() {
         lottery4matches={lottery4matches}
         lottery5matches={conditionMet ? 1 : 0}
       />
-      <div className='flex h-9.5 mb-6 mt-8'>
-        <p className='my-auto w-40'>Winning numbers:</p>
-        <LotteryNumbers lotteryNumbers={lotteryNumbers} />
+      <div className='text-xs sm:text-base font font-semibold	sm:font-normal'>
+        <div className='flex h-7 sm:h-9.5 mb-6 mt-8'>
+          <p className='my-auto w-40'>Winning numbers:</p>
+          <LotteryNumbers lotteryNumbers={lotteryNumbers} />
+        </div>
+        <div className='flex h-7 sm:h-9.5 mb-8'>
+          <p className='my-auto w-40'>Your numbers:</p>
+          <LotteryNumbers lotteryNumbers={lotteryNumbersTip} />
+        </div>
+        <div className='flex items-center mb-8'>
+          <div className='mr-5 sm:mr-14'>Play with random numbers:</div>
+          <button
+            className={clsx(
+              "cursor-pointer w-4 sm:w-8 h-4 sm:h-8 border border-mito-primary rounded",
+              conditionMet
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-grey-700"
+            )}
+            onClick={() => setIsRandomNumber(!isRandomNumber)}
+            disabled={conditionMet}
+          >
+            {isRandomNumber && (
+              <div className='flex items-center justify-center'>
+                <Image
+                  priority
+                  src={checkIcon}
+                  alt='random number'
+                  className='w-2.5 sm:w-fit'
+                />
+              </div>
+            )}
+          </button>
+        </div>
+        <p>Speed</p>
+        <RangeSlider
+          min={1}
+          max={1000}
+          step={1}
+          intervalValue={intervalValue}
+          setIntervalValue={setIntervalValue}
+        />
       </div>
-      <div className='flex h-9.5 mb-8'>
-        <p className='my-auto w-40'>Your numbers:</p>
-        <LotteryNumbers lotteryNumbers={lotteryNumbersTip} />
-      </div>
-      <div className='flex items-center mb-8'>
-        <div className='mr-14'>Play with random numbers:</div>
-        <button
-          className={clsx(
-            "cursor-pointer w-8 h-8 border border-mito-primary rounded",
-            conditionMet ? "opacity-50 cursor-not-allowed" : "hover:bg-grey-700"
-          )}
-          onClick={() => setIsRandomNumber(!isRandomNumber)}
-          disabled={conditionMet}
-        >
-          {isRandomNumber && (
-            <div className='flex items-center justify-center'>
-              <Image priority src={checkIcon} alt='random number' />
-            </div>
-          )}
-        </button>
-      </div>
-      <p>Speed</p>
-      <RangeSlider
-        min={1}
-        max={1000}
-        step={1}
-        intervalValue={intervalValue}
-        setIntervalValue={setIntervalValue}
-      />
       {conditionMet && <p>Condition met!</p>}
       {_.isEmpty(lotteryNumbersTip) && (
         <Modal

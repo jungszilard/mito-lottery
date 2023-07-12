@@ -11,7 +11,7 @@ const Header = () => {
         className='ml-5 mr-8 '
         data-testid='lottery-icon'
       />
-      <p className='text-white text-4xl	font-bold capitalize'>
+      <p className='text-white text-xl sm:text-4xl font-bold capitalize'>
         Lottery simulator
       </p>
     </div>

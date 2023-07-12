@@ -18,9 +18,11 @@ export default function RootLayout({
     <html lang='en'>
       <body className='bg-mito-grad text-mito-primary'>
         <Header />
-        <div className='py-12 px-20 mt-10 container mx-auto bg-white rounded-3xl shadow-component'>
-          {children}
-        </div>
+        <main className='px-5'>
+          <div className='py-6 sm:py-12 px-4 sm:px-20 mt-6 sm:mt-10 sm:container mx-auto bg-white rounded-3xl shadow-component'>
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   )
