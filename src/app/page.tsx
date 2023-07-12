@@ -5,8 +5,12 @@ import { useEffect, useState } from "react"
 import RangeSlider from "../components/RangeSlider"
 import Image from "next/image"
 import checkIcon from "../../public/check.svg"
+import LotteryNumbers from "../components/LotteryNumbers"
+import Modal from "../components/Modal"
+import ResultDetails from "../components/ResutDetails"
+import Summary from "../components/Summary"
 
-const generateLotteryNumbers = (): number[] => {
+export const generateLotteryNumbers = (): number[] => {
   const numbers: number[] = []
 
   while (numbers.length < 5) {
@@ -20,6 +24,10 @@ const generateLotteryNumbers = (): number[] => {
   return numbers
 }
 
+export const formatNumber = (number: number): string => {
+  return new Intl.NumberFormat().format(number).replace(/,/g, " ")
+}
+
 export default function Home() {
   const [lotteryNumbers, setLotteryNumbers] = useState<number[]>([])
   const [lottery2matches, setLottery2matches] = useState<number>(0)
@@ -31,14 +39,11 @@ export default function Home() {
   const [ticketNumber, setTicketNumber] = useState(0)
   const [intervalValue, setIntervalValue] = useState<number>(1)
 
-  const formatNumber = (number: number): string => {
-    return new Intl.NumberFormat().format(number).replace(/,/g, " ")
-  }
-
-  const handleRandomNumber = () => {
-    setIsRandomNumber(!isRandomNumber)
-    !isRandomNumber && setLotteryNumbersTip(generateLotteryNumbers())
-  }
+  useEffect(() => {
+    isRandomNumber
+      ? setLotteryNumbersTip(generateLotteryNumbers())
+      : setLotteryNumbersTip([])
+  }, [isRandomNumber])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,69 +89,20 @@ export default function Home() {
   return (
     <div data-testid='home-page'>
       <p className='text-4.5xl font-bold capitalize mb-8'>Result</p>
-      <div className='flex mb-8'>
-        <div className='flex bg-mito-secondary text-white font-bold py-4.5 px-6 rounded-base'>
-          <div className='mr-6'>
-            <p data-testid='number-of-ticket'>Number of tickets:</p>
-            <p className='text-sm'>Years spent:</p>
-            <p className='text-sm'>Cost of tickets:</p>
-          </div>
-          <div>
-            <p>{formatNumber(ticketNumber)}</p>
-            <p className='text-sm'>
-              {formatNumber(Math.floor(ticketNumber / 51))}
-            </p>
-            <p className='text-sm'>{formatNumber(ticketNumber * 300)},00 Ft</p>
-          </div>
-        </div>
-      </div>
-      <div className='flex mb-8'>
-        <div className='flex border border-solid border-result-border rounded-base'>
-          <div className='border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3'>
-            <p className='font-bold text-xs'>2 matches</p>
-            <p className='font-extrabold'>{formatNumber(lottery2matches)}</p>
-          </div>
-          <div className='border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3'>
-            <p className='font-bold text-xs'>3 matches</p>
-            <p className='font-extrabold'>{formatNumber(lottery3matches)}</p>
-          </div>
-          <div className='border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3'>
-            <p className='font-bold text-xs'>4 matches</p>
-            <p className='font-extrabold'>{formatNumber(lottery4matches)}</p>
-          </div>
-          <div className='w-32 h-18 flex flex-col justify-between items-center py-3'>
-            <p className='font-bold text-xs'>5 matches</p>
-            <p className='font-extrabold'>{conditionMet ? 1 : 0}</p>
-          </div>
-        </div>
-      </div>
-      <div className='flex h-9.5 mb-6 '>
+      <Summary ticketNumber={ticketNumber} />
+      <ResultDetails
+        lottery2matches={lottery2matches}
+        lottery3matches={lottery3matches}
+        lottery4matches={lottery4matches}
+        lottery5matches={conditionMet ? 1 : 0}
+      />
+      <div className='flex h-9.5 mb-6 mt-8'>
         <p className='my-auto w-40'>Winning numbers:</p>
-        {lotteryNumbers &&
-          lotteryNumbers
-            // .sort((n1, n2) => n1 - n2)
-            .map((lotteryNumber) => (
-              <div
-                key={lotteryNumber}
-                className='w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4'
-              >
-                {lotteryNumber}
-              </div>
-            ))}
+        <LotteryNumbers lotteryNumbers={lotteryNumbers} />
       </div>
       <div className='flex h-9.5 mb-8'>
         <p className='my-auto w-40'>Your numbers:</p>
-        {lotteryNumbersTip &&
-          lotteryNumbersTip
-            // .sort((n1, n2) => n1 - n2)
-            .map((lotteryNumber) => (
-              <div
-                key={lotteryNumber}
-                className='w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4'
-              >
-                {lotteryNumber}
-              </div>
-            ))}
+        <LotteryNumbers lotteryNumbers={lotteryNumbersTip} />
       </div>
       <div className='flex items-center mb-8'>
         <div className='mr-14'>Play with random numbers:</div>
@@ -155,7 +111,7 @@ export default function Home() {
             "cursor-pointer w-8 h-8 border border-mito-primary rounded",
             conditionMet ? "opacity-50 cursor-not-allowed" : "hover:bg-grey-700"
           )}
-          onClick={() => handleRandomNumber()}
+          onClick={() => setIsRandomNumber(!isRandomNumber)}
           disabled={conditionMet}
         >
           {isRandomNumber && (
@@ -165,7 +121,6 @@ export default function Home() {
           )}
         </button>
       </div>
-      {/* <div>{intervalValue}</div> */}
       <p>Speed</p>
       <RangeSlider
         min={1}
@@ -175,6 +130,12 @@ export default function Home() {
         setIntervalValue={setIntervalValue}
       />
       {conditionMet && <p>Condition met!</p>}
+      {_.isEmpty(lotteryNumbersTip) && (
+        <Modal
+          setLotteryNumbersTip={setLotteryNumbersTip}
+          setIsRandomNumber={setIsRandomNumber}
+        />
+      )}
     </div>
   )
 }

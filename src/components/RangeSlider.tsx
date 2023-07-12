@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
 
-interface IRangeSlider {
+interface IRangeSliderProps {
   min: number
   max: number
   step: number
@@ -14,7 +14,7 @@ const RangeSlider = ({
   step,
   intervalValue,
   setIntervalValue,
-}: IRangeSlider) => {
+}: IRangeSliderProps) => {
   return (
     <div className=''>
       <input
