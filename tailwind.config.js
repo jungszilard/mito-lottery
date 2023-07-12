@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import { fontFamily } from "tailwindcss/defaultTheme"
+
 module.exports = {
   mode: "jit",
   content: [
@@ -26,6 +29,9 @@ module.exports = {
           grad: "#F2F2F2",
           "result-border": "#F6F0C6",
         },
+      },
+      fontFamily: {
+        nunito: ["var(--font-nunito)", ...fontFamily.sans],
       },
       fontSize: {
         "4.5xl": "2.5rem",
