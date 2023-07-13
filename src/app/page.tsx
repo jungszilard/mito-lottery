@@ -10,55 +10,75 @@ import Modal from "../components/Modal"
 import ResultDetails from "../components/ResutDetails"
 import Summary from "../components/Summary"
 import { generateLotteryNumbers } from "../components/utils"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import {
+  setIsRandomNumber,
+  setSelectedLotteryNumbers,
+} from "../redux/slices/lotteryNumberSlice"
 
 export default function Home() {
-  const [lotteryNumbers, setLotteryNumbers] = useState<number[]>([])
-  const [lottery2matches, setLottery2matches] = useState<number>(0)
-  const [lottery3matches, setLottery3matches] = useState<number>(0)
-  const [lottery4matches, setLottery4matches] = useState<number>(0)
-  const [lotteryNumbersTip, setLotteryNumbersTip] = useState<number[]>([])
-  const [isRandomNumber, setIsRandomNumber] = useState<boolean>(false)
-  const [conditionMet, setConditionMet] = useState(false)
-  const [ticketNumber, setTicketNumber] = useState(0)
-  const [intervalValue, setIntervalValue] = useState<number>(1)
+  const dispatch = useAppDispatch()
+
+  const intervalValue = useAppSelector((state) => state.inetrval.intervalValue)
+  const isRandomNumber = useAppSelector(
+    (state) => state.lotteryNumber.isRandomNumber
+  )
+  const selectedLotteryNumbers = useAppSelector(
+    (state) => state.lotteryNumber.selectedLotteryNumbers
+  )
+
+  const [drawnLotteryNumbers, setDrawnLotteryNumbers] = useState<number[]>([])
+
+  const [twoMatchingNumbers, setTwoMatchingNumbers] = useState<number>(0)
+  const [threeMatchingNumbers, setThreeMatchingNumbers] = useState<number>(0)
+  const [fourMatchingNumbers, setFourMatchingNumbers] = useState<number>(0)
+  const [isFiveMatchingNumbers, setIsFiveMatchingNumbers] = useState(false)
+
+  const [numberOfTickets, setNumberOfTickets] = useState(0)
 
   useEffect(() => {
     isRandomNumber
-      ? setLotteryNumbersTip(generateLotteryNumbers())
-      : setLotteryNumbersTip([])
-  }, [isRandomNumber])
+      ? dispatch(setSelectedLotteryNumbers(generateLotteryNumbers()))
+      : dispatch(setSelectedLotteryNumbers([]))
+  }, [isRandomNumber, dispatch])
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (_.isEmpty(lotteryNumbersTip) || conditionMet) {
+      if (_.isEmpty(selectedLotteryNumbers) || isFiveMatchingNumbers) {
         clearInterval(interval)
         return
       }
       const newNumbers = generateLotteryNumbers()
-      setLotteryNumbers(newNumbers)
+      setDrawnLotteryNumbers(newNumbers)
 
       const isWinning = newNumbers.every((lotteryNumber) =>
-        lotteryNumbersTip.includes(lotteryNumber)
+        selectedLotteryNumbers.includes(lotteryNumber)
       )
 
       if (isWinning) {
-        setConditionMet(true)
+        setIsFiveMatchingNumbers(true)
         clearInterval(interval)
       } else {
-        setTicketNumber((prevTicketNumber) => prevTicketNumber + 1)
+        setNumberOfTickets((prevNumberOfTickets) => prevNumberOfTickets + 1)
         const matchesNumber = newNumbers.filter((number) =>
-          lotteryNumbersTip.includes(number)
+          selectedLotteryNumbers.includes(number)
         )
 
         switch (matchesNumber.length) {
           case 2:
-            setLottery2matches((prevLottery2matches) => prevLottery2matches + 1)
+            setTwoMatchingNumbers(
+              (prevLottery2matches) => prevLottery2matches + 1
+            )
             break
           case 3:
-            setLottery3matches((prevLottery3matches) => prevLottery3matches + 1)
+            setThreeMatchingNumbers(
+              (prevLottery3matches) => prevLottery3matches + 1
+            )
             break
           case 4:
-            setLottery4matches((prevLottery4matches) => prevLottery4matches + 1)
+            setFourMatchingNumbers(
+              (prevLottery4matches) => prevLottery4matches + 1
+            )
             break
         }
       }
@@ -67,38 +87,38 @@ export default function Home() {
     return () => {
       clearInterval(interval)
     }
-  }, [conditionMet, lotteryNumbersTip, intervalValue])
+  }, [isFiveMatchingNumbers, selectedLotteryNumbers, intervalValue])
 
   return (
     <div data-testid='home-page'>
       <p className='text-3xl sm:text-4.5xl font-bold capitalize mb-8'>Result</p>
-      <Summary ticketNumber={ticketNumber} />
+      <Summary numberOfTickets={numberOfTickets} />
       <ResultDetails
-        lottery2matches={lottery2matches}
-        lottery3matches={lottery3matches}
-        lottery4matches={lottery4matches}
-        lottery5matches={conditionMet ? 1 : 0}
+        lottery2matches={twoMatchingNumbers}
+        lottery3matches={threeMatchingNumbers}
+        lottery4matches={fourMatchingNumbers}
+        lottery5matches={isFiveMatchingNumbers ? 1 : 0}
       />
       <div className='text-xs sm:text-base font font-semibold	sm:font-normal'>
         <div className='flex h-7 sm:h-9.5 mb-6 mt-8'>
           <p className='my-auto w-40'>Winning numbers:</p>
-          <LotteryNumbers lotteryNumbers={lotteryNumbers} />
+          <LotteryNumbers lotteryNumbers={drawnLotteryNumbers} />
         </div>
         <div className='flex h-7 sm:h-9.5 mb-8'>
           <p className='my-auto w-40'>Your numbers:</p>
-          <LotteryNumbers lotteryNumbers={lotteryNumbersTip} />
+          <LotteryNumbers lotteryNumbers={selectedLotteryNumbers} />
         </div>
         <div className='flex items-center mb-8'>
           <div className='mr-5 sm:mr-14'>Play with random numbers:</div>
           <button
             className={clsx(
               "cursor-pointer w-4 sm:w-8 h-4 sm:h-8 border border-mito-primary rounded",
-              conditionMet
+              isFiveMatchingNumbers
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-grey-700"
             )}
-            onClick={() => setIsRandomNumber(!isRandomNumber)}
-            disabled={conditionMet}
+            onClick={() => dispatch(setIsRandomNumber(!isRandomNumber))}
+            disabled={isFiveMatchingNumbers}
           >
             {isRandomNumber && (
               <div className='flex items-center justify-center'>
@@ -113,21 +133,9 @@ export default function Home() {
           </button>
         </div>
         <p>Speed</p>
-        <RangeSlider
-          min={1}
-          max={1000}
-          step={1}
-          intervalValue={intervalValue}
-          setIntervalValue={setIntervalValue}
-        />
+        <RangeSlider min={1} max={1000} step={1} />
       </div>
-      {conditionMet && <p>Condition met!</p>}
-      {_.isEmpty(lotteryNumbersTip) && (
-        <Modal
-          setLotteryNumbersTip={setLotteryNumbersTip}
-          setIsRandomNumber={setIsRandomNumber}
-        />
-      )}
+      {_.isEmpty(selectedLotteryNumbers) && <Modal />}
     </div>
   )
 }

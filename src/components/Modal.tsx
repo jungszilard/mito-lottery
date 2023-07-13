@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Dispatch, SetStateAction } from "react"
 import _ from "lodash"
 import { generateLotteryNumbers } from "./utils"
+import { useAppDispatch } from "../redux/hooks"
+import {
+  setIsRandomNumber,
+  setSelectedLotteryNumbers,
+} from "../redux/slices/lotteryNumberSlice"
 
 type FormData = {
   number1: number
@@ -22,12 +26,9 @@ enum FIELD_NUMBER {
 
 type FieldOption = "number1" | "number2" | "number3" | "number4" | "number5"
 
-interface IModalProps {
-  setLotteryNumbersTip: Dispatch<SetStateAction<number[]>>
-  setIsRandomNumber: Dispatch<SetStateAction<boolean>>
-}
+const Modal = () => {
+  const dispatch = useAppDispatch()
 
-const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
   const {
     setError,
     register,
@@ -45,8 +46,8 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
     )
 
     if (_.isEmpty(duplicatedNumbers)) {
-      setLotteryNumbersTip(lotteryNumbers)
-      setIsRandomNumber(false)
+      dispatch(setIsRandomNumber(false))
+      dispatch(setSelectedLotteryNumbers(lotteryNumbers))
     } else {
       duplicatedNumbers.forEach((number: number) => {
         const fields = _.pickBy(numbers, (val) => val === number)
@@ -112,8 +113,10 @@ const Modal = ({ setLotteryNumbersTip, setIsRandomNumber }: IModalProps) => {
                     className='h-18 sm:h-max bg-blue-400 hover:bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-xs sm:text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
                     type='button'
                     onClick={() => {
-                      setLotteryNumbersTip(generateLotteryNumbers())
-                      setIsRandomNumber(true)
+                      dispatch(setIsRandomNumber(true))
+                      dispatch(
+                        setSelectedLotteryNumbers(generateLotteryNumbers())
+                      )
                     }}
                   >
                     Play with random numbers

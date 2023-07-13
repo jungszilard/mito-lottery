@@ -19,7 +19,7 @@ exports[`renders homepage unchanged 1`] = `
       width="40"
     />
     <p
-      class="text-white text-4xl font-bold capitalize"
+      class="text-white text-xl sm:text-4xl font-bold capitalize"
     >
       Lottery simulator
     </p>

@@ -6,24 +6,34 @@ exports[`renders homepage unchanged 1`] = `
     data-testid="home-page"
   >
     <p
-      class="text-4.5xl font-bold capitalize mb-8"
+      class="text-3xl sm:text-4.5xl font-bold capitalize mb-8"
     >
       Result
     </p>
     <div
-      class="flex mb-8"
+      class="sm:flex mb-8"
     >
       <div
-        class="flex bg-mito-secondary text-white font-bold py-4.5 px-6 rounded-base"
+        class="flex flex-col bg-mito-secondary text-white font-bold py-4.5 px-4 sm:px-6 rounded sm:rounded-base"
       >
         <div
-          class="mr-6"
+          class="grid grid-cols-2 gap-4"
         >
           <p
+            class="text-sm sm:text-base"
             data-testid="number-of-ticket"
           >
             Number of tickets:
           </p>
+          <p
+            class="text-sm sm:text-base"
+          >
+            0
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-2 gap-4"
+        >
           <p
             class="text-sm"
           >
@@ -32,17 +42,16 @@ exports[`renders homepage unchanged 1`] = `
           <p
             class="text-sm"
           >
-            Cost of tickets:
-          </p>
-        </div>
-        <div>
-          <p>
             0
           </p>
+        </div>
+        <div
+          class="grid grid-cols-2 gap-4"
+        >
           <p
             class="text-sm"
           >
-            0
+            Cost of tickets:
           </p>
           <p
             class="text-sm"
@@ -57,10 +66,10 @@ exports[`renders homepage unchanged 1`] = `
       class="flex"
     >
       <div
-        class="flex border border-solid border-result-border rounded-base"
+        class="grid grid-cols-2 sm:flex border border-solid border-result-border rounded sm:rounded-base"
       >
         <div
-          class="border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
+          class="border-r border-b sm:border-b-0 border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
         >
           <p
             class="font-bold text-xs"
@@ -74,7 +83,7 @@ exports[`renders homepage unchanged 1`] = `
           </p>
         </div>
         <div
-          class="border-r border-solid border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
+          class="sm:border-r border-b sm:border-b-0 sm:border-solid sm:border-result-border w-32 h-18 flex flex-col justify-between items-center py-3"
         >
           <p
             class="font-bold text-xs"
@@ -118,88 +127,92 @@ exports[`renders homepage unchanged 1`] = `
       </div>
     </div>
     <div
-      class="flex h-9.5 mb-6 mt-8"
+      class="text-xs sm:text-base font font-semibold sm:font-normal"
     >
-      <p
-        class="my-auto w-40"
+      <div
+        class="flex h-7 sm:h-9.5 mb-6 mt-8"
       >
-        Winning numbers:
+        <p
+          class="my-auto w-40"
+        >
+          Winning numbers:
+        </p>
+        <div
+          class="flex"
+        >
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+        </div>
+      </div>
+      <div
+        class="flex h-7 sm:h-9.5 mb-8"
+      >
+        <p
+          class="my-auto w-40"
+        >
+          Your numbers:
+        </p>
+        <div
+          class="flex"
+        >
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+          <div
+            class="w-5.5 sm:w-8.5 border border-mito-secondary rounded sm:rounded-base flex justify-center items-center ml-4"
+          />
+        </div>
+      </div>
+      <div
+        class="flex items-center mb-8"
+      >
+        <div
+          class="mr-5 sm:mr-14"
+        >
+          Play with random numbers:
+        </div>
+        <button
+          class="cursor-pointer w-4 sm:w-8 h-4 sm:h-8 border border-mito-primary rounded hover:bg-grey-700"
+        />
+      </div>
+      <p>
+        Speed
       </p>
       <div
-        class="flex"
+        class=""
       >
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
+        <input
+          class="w-full h-2 bg-mito-secondary rounded-lg appearance-none cursor-pointer"
+          id="steps-range"
+          max="1000"
+          min="1"
+          step="1"
+          type="range"
+          value="1"
         />
       </div>
-    </div>
-    <div
-      class="flex h-9.5 mb-8"
-    >
-      <p
-        class="my-auto w-40"
-      >
-        Your numbers:
-      </p>
-      <div
-        class="flex"
-      >
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-        <div
-          class="w-8.5 border border-mito-secondary rounded-base flex justify-center items-center ml-4"
-        />
-      </div>
-    </div>
-    <div
-      class="flex items-center mb-8"
-    >
-      <div
-        class="mr-14"
-      >
-        Play with random numbers:
-      </div>
-      <button
-        class="cursor-pointer w-8 h-8 border border-mito-primary rounded hover:bg-grey-700"
-      />
-    </div>
-    <p>
-      Speed
-    </p>
-    <div
-      class=""
-    >
-      <input
-        class="w-full h-2 bg-mito-secondary rounded-lg appearance-none cursor-pointer"
-        id="steps-range"
-        max="1000"
-        min="1"
-        step="1"
-        type="range"
-        value="1"
-      />
     </div>
     <div
       class="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -214,7 +227,7 @@ exports[`renders homepage unchanged 1`] = `
             class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t"
           >
             <h3
-              class="text-3xl font-semibold"
+              class="text-2xl sm:text-3xl font-semibold"
             >
               Pick your lottery numbers
             </h3>
@@ -224,7 +237,7 @@ exports[`renders homepage unchanged 1`] = `
           >
             <form>
               <div
-                class="mb-3 flex justify-around items-center"
+                class="mb-3 flex justify-around items-center text-sm sm:text-base"
               >
                 <label>
                   Pick your lottery number 
@@ -232,13 +245,13 @@ exports[`renders homepage unchanged 1`] = `
                   :
                 </label>
                 <input
-                  class="w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
                   name="number1"
                   type="number"
                 />
               </div>
               <div
-                class="mb-3 flex justify-around items-center"
+                class="mb-3 flex justify-around items-center text-sm sm:text-base"
               >
                 <label>
                   Pick your lottery number 
@@ -246,13 +259,13 @@ exports[`renders homepage unchanged 1`] = `
                   :
                 </label>
                 <input
-                  class="w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
                   name="number2"
                   type="number"
                 />
               </div>
               <div
-                class="mb-3 flex justify-around items-center"
+                class="mb-3 flex justify-around items-center text-sm sm:text-base"
               >
                 <label>
                   Pick your lottery number 
@@ -260,13 +273,13 @@ exports[`renders homepage unchanged 1`] = `
                   :
                 </label>
                 <input
-                  class="w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
                   name="number3"
                   type="number"
                 />
               </div>
               <div
-                class="mb-3 flex justify-around items-center"
+                class="mb-3 flex justify-around items-center text-sm sm:text-base"
               >
                 <label>
                   Pick your lottery number 
@@ -274,13 +287,13 @@ exports[`renders homepage unchanged 1`] = `
                   :
                 </label>
                 <input
-                  class="w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
                   name="number4"
                   type="number"
                 />
               </div>
               <div
-                class="mb-3 flex justify-around items-center"
+                class="mb-3 flex justify-around items-center text-sm sm:text-base"
               >
                 <label>
                   Pick your lottery number 
@@ -288,7 +301,7 @@ exports[`renders homepage unchanged 1`] = `
                   :
                 </label>
                 <input
-                  class="w-8.5 h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
                   name="number5"
                   type="number"
                 />
@@ -297,13 +310,13 @@ exports[`renders homepage unchanged 1`] = `
                 class="flex items-center justify-end pt-6 mt-4 border-t border-solid border-slate-200 rounded-b"
               >
                 <button
-                  class="bg-blue-400 hover:bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  class="h-18 sm:h-max bg-blue-400 hover:bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-xs sm:text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
                 >
                   Play with random numbers
                 </button>
                 <button
-                  class="bg-emerald-400 hover:bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  class="h-18 sm:h-max bg-emerald-400 hover:bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs sm:text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit"
                 >
                   Submit
