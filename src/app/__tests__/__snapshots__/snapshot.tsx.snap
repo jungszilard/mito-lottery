@@ -237,74 +237,84 @@ exports[`renders homepage unchanged 1`] = `
           >
             <form>
               <div
-                class="mb-3 flex justify-around items-center text-sm sm:text-base"
+                class="mb-3 flex flex-col justify-around items-center text-sm sm:text-base"
               >
-                <label>
-                  Pick your lottery number 
-                  1
-                  :
-                </label>
-                <input
-                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
-                  name="number1"
-                  type="number"
-                />
+                <div>
+                  <label>
+                    Pick your lottery number 
+                    1
+                    :
+                  </label>
+                  <input
+                    class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                    name="number1"
+                    type="number"
+                  />
+                </div>
               </div>
               <div
-                class="mb-3 flex justify-around items-center text-sm sm:text-base"
+                class="mb-3 flex flex-col justify-around items-center text-sm sm:text-base"
               >
-                <label>
-                  Pick your lottery number 
-                  2
-                  :
-                </label>
-                <input
-                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
-                  name="number2"
-                  type="number"
-                />
+                <div>
+                  <label>
+                    Pick your lottery number 
+                    2
+                    :
+                  </label>
+                  <input
+                    class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                    name="number2"
+                    type="number"
+                  />
+                </div>
               </div>
               <div
-                class="mb-3 flex justify-around items-center text-sm sm:text-base"
+                class="mb-3 flex flex-col justify-around items-center text-sm sm:text-base"
               >
-                <label>
-                  Pick your lottery number 
-                  3
-                  :
-                </label>
-                <input
-                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
-                  name="number3"
-                  type="number"
-                />
+                <div>
+                  <label>
+                    Pick your lottery number 
+                    3
+                    :
+                  </label>
+                  <input
+                    class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                    name="number3"
+                    type="number"
+                  />
+                </div>
               </div>
               <div
-                class="mb-3 flex justify-around items-center text-sm sm:text-base"
+                class="mb-3 flex flex-col justify-around items-center text-sm sm:text-base"
               >
-                <label>
-                  Pick your lottery number 
-                  4
-                  :
-                </label>
-                <input
-                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
-                  name="number4"
-                  type="number"
-                />
+                <div>
+                  <label>
+                    Pick your lottery number 
+                    4
+                    :
+                  </label>
+                  <input
+                    class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                    name="number4"
+                    type="number"
+                  />
+                </div>
               </div>
               <div
-                class="mb-3 flex justify-around items-center text-sm sm:text-base"
+                class="mb-3 flex flex-col justify-around items-center text-sm sm:text-base"
               >
-                <label>
-                  Pick your lottery number 
-                  5
-                  :
-                </label>
-                <input
-                  class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
-                  name="number5"
-                  type="number"
-                />
+                <div>
+                  <label>
+                    Pick your lottery number 
+                    5
+                    :
+                  </label>
+                  <input
+                    class="w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center"
+                    name="number5"
+                    type="number"
+                  />
+                </div>
               </div>
               <div
                 class="flex items-center justify-end pt-6 mt-4 border-t border-solid border-slate-200 rounded-b"

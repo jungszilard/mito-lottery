@@ -70,16 +70,20 @@ const Modal = () => {
     lotteryNumber: number
   ) => {
     return (
-      <div className='mb-3 flex justify-around items-center text-sm sm:text-base'>
-        <label>Pick your lottery number {lotteryNumber}:</label>
-        <input
-          className='w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center'
-          type='number'
-          {...register(field, { required: true, valueAsNumber: true })}
-          onChange={(e) => handleLotteryNumber(field, parseInt(e.target.value))}
-        />
+      <div className='mb-3 flex flex-col justify-around items-center text-sm sm:text-base'>
+        <div>
+          <label>Pick your lottery number {lotteryNumber}:</label>
+          <input
+            className='w-5.5 sm:w-8.5 h-7 sm:h-9.5 ml-5 border border-mito-secondary rounded-base text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-center'
+            type='number'
+            {...register(field, { required: true, valueAsNumber: true })}
+            onChange={(e) =>
+              handleLotteryNumber(field, parseInt(e.target.value))
+            }
+          />
+        </div>
         {errors[field] && (
-          <p className='text-red-500 text-xs italic'>
+          <p className='text-red-500 text-xs italic mr-8 sm:mr-3'>
             {errors[field]?.message
               ? errors[field]?.message
               : "Lottery number is required"}
